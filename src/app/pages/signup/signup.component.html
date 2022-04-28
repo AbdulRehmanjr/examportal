@@ -1,0 +1,119 @@
+<!-- bootstrap essential for grid -->
+<div class="bootstrap-wrapper">
+    <div class="container w-50">
+        <div class="row mt-1">
+            <div class="col-md-6 offset-md-3">
+                <mat-card>
+                <div class="container text-center">
+                    <img src="../../../assets/register.png" alt="regiter logo" style="height:50px; border: none;border-radius: 50%;">
+                </div>
+                <h1 class="text-center h1size">Register Here</h1>
+                <form [formGroup]="SignupForm" (ngSubmit)="FormSubmit()">
+                    <!-- firstname -->
+                    <mat-form-field  appearance="outline" class="w-100">
+                        <mat-label>First Name</mat-label>
+                        <input 
+                        formControlName="firstName" 
+                        matInput placeholder="Abdul" >
+                        <mat-icon matSuffix>person</mat-icon>
+                    </mat-form-field>
+                    <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)" >
+                        <mat-error *ngIf="firstName.errors?.['required'] ">
+                            First Name is required
+                        </mat-error>   
+                        <mat-error *ngIf="password.errors?.['minlength']">
+                            First Name must be at least 8 characters long.
+                        </mat-error> 
+                    </div>
+                    <!-- lastname -->
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Last Name</mat-label>
+                        <input 
+                       formControlName="lastName"
+                        matInput placeholder="Rehman">
+                        <mat-icon matSuffix>person</mat-icon>
+                       
+                    </mat-form-field>
+                    <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)" >
+                        <mat-error *ngIf="lastName.errors?.['required'] ">
+                            Last Name is required
+                        </mat-error>
+                        <mat-error *ngIf="password.errors?.['minlength']">
+                            Last Name must be at least 3 characters long.
+                        </mat-error>    
+                    </div>
+                    <!-- username -->
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>User Name</mat-label>
+                        <input 
+                        formControlName="username"
+                        
+                        matInput placeholder="Abdul101">
+                        <mat-icon matSuffix>public</mat-icon>
+                       
+                    </mat-form-field>
+                    <div *ngIf="username.invalid && (username.dirty || username.touched)" >
+                        <mat-error *ngIf="username.errors?.['required'] ">
+                            User Name is required
+                        </mat-error>  
+                        <mat-error *ngIf="password.errors?.['minlength']">
+                            User Name must be at least 6 characters long.
+                        </mat-error>  
+                    </div>
+                    <!-- email -->
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Email</mat-label>
+                        <input 
+                        formControlName="email"  
+                        type="email" matInput placeholder="abdulrehman@gmail.com">
+                        <mat-icon matSuffix>email</mat-icon>
+                        
+                    </mat-form-field>
+                    <div *ngIf="email.invalid && (email.dirty || email.touched)" >
+                        <mat-error *ngIf="email.errors?.['required'] ">
+                           Email is required
+                        </mat-error>    
+                    </div>
+                    <!-- phone -->
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Phone No.</mat-label>
+                        <input 
+                        formControlName="phone"
+                        type="tel" matInput placeholder="Abdul Rehman">
+                        <mat-icon matSuffix>phone_android</mat-icon>
+                        
+                    </mat-form-field>
+                    <div *ngIf="phone.invalid && (phone.dirty || phone.touched)" >
+                        
+                        <mat-error *ngIf="phone.errors?.['required'] ">
+                            Phone number is required
+                        </mat-error>    
+                    </div>
+                      <!-- password -->
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Password</mat-label>
+                        <input 
+                        formControlName="password"
+                        type="password" matInput placeholder="password">
+                        <mat-icon matSuffix>lock</mat-icon>
+                    </mat-form-field>
+                    <div *ngIf="password.invalid && (password.dirty || password.touched)" >
+                        <mat-error *ngIf="password.errors?.['required'] ">
+                            Password is required
+                        </mat-error>    
+                        <mat-error *ngIf="password.errors?.['minlength']">
+                            Password must be at least 8 characters long.
+                        </mat-error>
+                    </div>
+                    
+                    <div class="container text-center">
+                        <button [disabled]="!SignupForm.valid"type="submit"mat-raised-button color="primary">
+                            Register
+                        </button>
+                    </div>
+                </form>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,16 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.mt20{
+    margin-top: 20px;
+}
+.positiontop{
+    position: absolute;
+    top: 120px;   
+}
+.h1size{
+    
+    color: blue;
+    font-size: 100px;
+}
