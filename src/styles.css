@@ -9,8 +9,16 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     position: absolute;
     top: 120px;   
 }
-.h1size{
-    
+.h1size{   
     color: blue;
     font-size: 100px;
+}
+.mr20{
+    margin-right: 20px !important;
+}
+.ml20{
+    margin-left: 20px !important;
+}
+.hovereffect:hover{
+    color: #ffffff !important;
 }

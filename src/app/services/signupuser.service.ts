@@ -11,6 +11,6 @@ export class SignupuserService {
 
   public signupUser(user:User) {
     console.log("saving user to server");
-    return this.httpClient.post(`${this.baseUrl}`+"register", user,{ responseType: 'json' }, );
+    return this.httpClient.post(`${this.baseUrl}`+"register", user,{responseType: 'text' }, );
   }
 }

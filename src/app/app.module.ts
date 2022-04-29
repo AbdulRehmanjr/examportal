@@ -21,6 +21,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { HomeComponent } from './components/home/home.component'; 
 import {MatCardModule} from '@angular/material/card';
+import {MatToolbarModule} from '@angular/material/toolbar'; 
+import { httpInterceptorProviders } from './services/authintercepter.service';
+import { DashboardComponent } from './components/admin/dashboard/dashboard.component';
+import { UserDashboardComponent } from './components/user/user-dashboard/user-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +32,9 @@ import {MatCardModule} from '@angular/material/card';
     NavbarComponent,
     SignupComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    DashboardComponent,
+    UserDashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -44,9 +50,10 @@ import {MatCardModule} from '@angular/material/card';
     ReactiveFormsModule,
     HttpClientModule,
     MatSnackBarModule,
-    MatCardModule
+    MatCardModule,
+    MatToolbarModule
   ],
-  providers: [],
+  providers: [httpInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
