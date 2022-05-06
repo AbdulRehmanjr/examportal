@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { User } from 'src/app/Model/user';
 import { SignupuserService } from '../../services/signupuser.service';
 import  swal from 'sweetalert2';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -14,7 +15,9 @@ export class SignupComponent implements OnInit {
   constructor(
     private formBuilder:FormBuilder,
     private userService:SignupuserService,
-    private snackbar: MatSnackBar
+    private snackbar: MatSnackBar,
+    private router:Router
+
   ) { }
 
   ngOnInit(): void {
@@ -62,6 +65,7 @@ export class SignupComponent implements OnInit {
           'User Created Successfully',
           'success'
         );
+        this.router.navigate(['login']);
         // disappear after 3 seconds
         // this.snackbar.open("User registered successfully", "", {
         //   duration: 3000,

@@ -7,13 +7,29 @@ import { DashboardComponent } from './components/admin/dashboard/dashboard.compo
 import { UserDashboardComponent } from './components/user/user-dashboard/user-dashboard.component';
 import { AdminGuard } from './services/admin.guard';
 import { UserGuard } from './services/user.guard';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { WelcomeComponent } from './components/admin/welcome/welcome.component';
+import { ViewCategoryComponent } from './components/admin/view-category/view-category.component';
+import { AddCategoryComponent } from './components/admin/add-category/add-category.component';
+import { ViewQuizzesComponent } from './components/admin/view-quizzes/view-quizzes.component';
 
 const routes: Routes = [
-  {path:'',component:HomeComponent,pathMatch: 'full'},
   {path: 'signup',component: SignupComponent,pathMatch: 'full'},
   {path:'login',component:LoginComponent},
-  {path:'admin',component:DashboardComponent,pathMatch:'full',canActivate:[AdminGuard]},
-  {path:'user',component:UserDashboardComponent,pathMatch:'full',canActivate:[UserGuard]},
+  {path:'admin',component:DashboardComponent,
+   canActivate:[AdminGuard],
+  children:[
+    {path:'profile',component:ProfileComponent},
+    {path:'categories',component:ViewCategoryComponent},
+    {path:'add-category',component:AddCategoryComponent},
+    {path:'quizzes',component:ViewQuizzesComponent},
+    {path:'',component:WelcomeComponent},
+  
+
+    ]
+  },
+  {path:'user-dashboard',component:UserDashboardComponent,pathMatch:'full',canActivate:[UserGuard]},
+  {path:'',component:HomeComponent,pathMatch: 'full'},
   {path: '**',redirectTo:'',pathMatch: 'full'}
 ];
 

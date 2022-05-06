@@ -6,6 +6,7 @@ import { LoginService } from '../../services/login.service';
 import  swal from 'sweetalert2';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -14,6 +15,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   LoginForm: FormGroup;
+//  CurrentUser:any;
   constructor(
     private formBuilder:FormBuilder,
     private loginService:LoginService,
@@ -58,19 +60,18 @@ export class LoginComponent implements OnInit {
       //  api service call
       this.loginService.generateToken(login).subscribe(
         (data:any)=>{
-          console.log("login successfull");
+          console.log("login successful");
           console.log(data);
           // login...
           this.loginService.loginUser(data.token);
           this.loginService.currentUser().subscribe(
             (data:any)=>{
-             // this.loginService.setUser(data);
-              console.log(data);
-              // redirectin according to role
-              this.redirection(data);
-              
+               this.loginService.setUser(data);
+              // console.log("Current user=>",this.CurrentUser);   // redirectin according to role  
+             this.redirection();
             }
-          );
+           );
+               
         },
         error=>{
           console.log("login failed");
@@ -84,18 +85,21 @@ export class LoginComponent implements OnInit {
       );
       
   }
-  private redirection(data:any){
-    const role = this.loginService.getUserRole();
+  private  redirection(){
+    console.log("inside redirection");
+    const role =  this.loginService.getUserRole();
     if( role== "ADMIN"){
       // redirect to admin dashboard
-      this.router.navigate(['/admin']);
+      console.log("inside admin")
+      this.router.navigate(['admin']);
+
     }else if(role == "USER"){
       // user dashboard
-      this.router.navigate(['/user']);
+      console.log("inside user dashboard");
+      this.router.navigate(['user-dashboard']);
     }
     else{
-      this.loginService.logout();
-      location.reload();
+      this.router.navigate(['login']);
     }
   }
 }

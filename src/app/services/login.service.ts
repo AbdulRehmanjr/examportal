@@ -1,16 +1,25 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Login } from '../Model/login';
+
+import {  Observable } from 'rxjs';
 import { User } from '../Model/user';
+
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class LoginService {
   private baseUrl = 'http://localhost:8080/api/';
-  
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient,
+    private router: Router) { }
 
+
+    OnInit(){
+       
+    }
   // generate token 
 
   public generateToken(login:Login){
@@ -19,8 +28,13 @@ export class LoginService {
   }
 
   public loginUser(token:any) {
-    localStorage.setItem('token', token);
-    return true;
+    
+    if(token!=null){
+      sessionStorage.setItem('token',token);
+      return true;
+    }
+    
+    return false;
   }
 
   // is user logged in
@@ -28,6 +42,7 @@ export class LoginService {
   public isLoggedIn() {
       let token = this.getToken();
       if (token ==undefined || token == null || token == "") {
+        console.log("token is null");
         return false;
       }
 
@@ -37,42 +52,45 @@ export class LoginService {
   // logout 
 
   public logout(){
-    localStorage.removeItem('token');
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('user');
+    this.router.navigate(['/login']);
     return true;
   }
   // get token 
   public getToken(){
-    return localStorage.getItem('token');
+    return sessionStorage.getItem('token');
   }
   //public getUser details => optional but not good for security
-
+  
   public setUser(user:any){
-    localStorage.setItem('user',JSON.stringify(user));
+    let  cu = new User();
+    console.log("user in set user",user);
+    cu.username = user.username;
+    cu.authority = user.authorities[0].authority;
+    sessionStorage.setItem('user',JSON.stringify(cu));
   }
   // get the user details
-  public getUser(){
+ public getUser(){
     
-    let user = localStorage.getItem('user');
-
-    
+    let user = JSON.parse(sessionStorage.getItem('user'));
+    console.log("getUser",user);
     if(user!=null){
-      return JSON.parse(user);
+      return user;
     }else{
-      this.logout();
+      // this.logout();
       return null;
     }
     
-  }
+ }
   // user role
-
   public getUserRole(){
-
-    let user = this.getUser();
-
-    return user.authorities[0].authority;
+      let user = this.getUser();
+    console.log("user",user);
+      return user.authority;
   }
-
-  public currentUser(){
+  
+  public currentUser():Observable<any>{
     return this.httpClient.get(`${this.baseUrl}current-user`);
   }
 }

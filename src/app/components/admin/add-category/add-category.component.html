@@ -1,0 +1,46 @@
+<div class="bootstrap-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <mat-card class="mt20">
+                <h1 class="text-center">Add category details</h1>
+                <form [formGroup]="addcategoryForm"(ngSubmit)="OnSubmit()">
+                    <!-- username -->
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Title</mat-label>
+                        <input 
+                        formControlName="title"  
+                        matInput placeholder="Abdul101">
+                        <mat-icon matSuffix>title</mat-icon>
+                        <mat-hint>Enter the title</mat-hint>
+                    </mat-form-field>
+                    <div *ngIf="title.invalid && (title.dirty || title.touched)" >
+                        <mat-error *ngIf="title.errors?.['required'] ">
+                          Title is required
+                        </mat-error>  
+                       
+                    </div>
+                    <mat-form-field appearance="outline" class="w-100">
+                        <mat-label>Description</mat-label>
+                        <textarea formControlName="description" matInput placeholder="Text Area...." cols="50" rows="15"></textarea>
+                        <mat-icon matSuffix>area</mat-icon>
+                        <mat-hint>Enter Description</mat-hint>
+                    </mat-form-field>
+                    <div *ngIf="description.invalid && (description.dirty || description.touched)" >
+                        <mat-error *ngIf="description.errors?.['required'] ">
+                            Description is required
+                        </mat-error>    
+                      
+                    </div>
+                    
+                    <div class="container text-center">
+                        <button [disabled]="!addcategoryForm.valid"type="submit"mat-raised-button color="primary">
+                           Add Category
+                        </button>
+                    </div>
+                </form>
+            </mat-card>
+            </div>
+        </div>
+    </div>
+</div>

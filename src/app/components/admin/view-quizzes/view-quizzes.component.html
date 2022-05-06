@@ -1,0 +1,46 @@
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>
+            <mat-icon>quiz</mat-icon>
+        <h1>Quizzes</h1>
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                    <th>#</th>
+                    <th>Quiz Name</th>
+                    <th>Quiz Description</th>
+                    <th>Quiz Marks</th>
+                    <th>Quiz Questions</th>
+                    <th>Quiz Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let quiz of quizzes; let i = index">
+                    <td>{{quiz.quizId}}</td>
+                    <td>{{quiz.title}}</td>
+                    <td>{{quiz.description}}</td>
+                    <td>{{quiz.maxMarks}}</td>
+                    <td>{{quiz.numberOfQuestions}}</td>
+                    
+                    <td *ngIf="quiz.active==false" style="color:red;">
+                        Not active
+                    </td>
+                    <td  *ngelse style="color:blue;">
+                        Active
+                    </td>
+                    </tr>
+                </tbody>
+                </table>
+            </div>
+            </div>
+        </div>
+        </div>
+    </mat-card-content>
+</mat-card>

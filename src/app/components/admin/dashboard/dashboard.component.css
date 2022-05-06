@@ -1,0 +1,4 @@
+/* side overflow on screen */
+.side-overflow{
+    overflow-x: hidden !important;
+}

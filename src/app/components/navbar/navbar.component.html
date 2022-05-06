@@ -5,11 +5,27 @@
   </a>
   <span>Examportal</span>
   <span class="example-spacer"></span>
-  <a routerLink="login"mat-icon-button class="hovereffect" aria-label="Example icon-button with heart icon">
+  <a 
+  *ngIf="!loginService.isLoggedIn()"
+  routerLink="login" mat-icon-button class="hovereffect" aria-label="Example icon-button with heart icon">
     Login
   </a>
-  <a routerLink="signup" mat-icon-button class=" mr20 ml20 hovereffect" aria-label="Example icon-button with share icon">
- 
+  <a
+  *ngIf="loginService.isLoggedIn()"
+   mat-icon-button class="hovereffect"style="margin-right:650px;" aria-label="Example icon-button with share icon">
+    Welcome {{loginService.getUser().username}}
+  </a>
+  <a 
+  (click)="logout()"
+  *ngIf="loginService.isLoggedIn()"
+  routerLink="login" mat-icon-button class="mr20 ml20 hovereffect" aria-label="Example icon-button with heart icon">
+    Logout
+  </a>
+
+  <a
+  *ngIf="!loginService.isLoggedIn()"
+  routerLink="signup" mat-icon-button class="mr20 ml20 hovereffect" aria-label="Example icon-button with share icon">
     Register
   </a>
+ 
 </mat-toolbar>
